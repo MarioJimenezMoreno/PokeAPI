@@ -1,0 +1,134 @@
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: aliceblue;
+}
+/*MAIN*/
+main {
+  width: 75%;
+  height: auto;
+  border-inline: 1px black solid;
+  background-color: rgb(241, 241, 241);
+  box-sizing: border-box;
+  display: grid;
+  grid-template:
+    repeat(auto-fit, minmax(200px, 225px)) /
+    repeat(auto-fit, minmax(200px, 225px));
+  z-index: -1;
+}
+/* @media (max-width: 1400px) {
+  main {
+    grid-template:
+      repeat(auto-fit, minmax(400px, 50%)) /
+      repeat(auto-fit, minmax(400px, 50%));
+  }
+} */
+@media (max-width: 1080px) {
+  main {
+    grid-template:
+      repeat(auto-fit, minmax(1fr, 25%))
+      /
+      repeat(auto-fit, minmax(1fr, 25%));
+  }
+}
+@media (max-width: 768px) {
+  main {
+    grid-template:
+      repeat(auto-fit, minmax(1fr, 50%))
+      /
+      repeat(auto-fit, minmax(1fr, 50%));
+  }
+}
+@media (max-width: 480px) {
+  main {
+    grid-template:
+      repeat(auto-fit, minmax(1fr, 50%))
+      /
+      repeat(auto-fit, minmax(1fr, 50%));
+  }
+}
+
+.pokeBlock {
+  margin: 20px;
+  height: 200px;
+  width: 200px;
+  border: 1px rgb(80, 80, 80) solid;
+  background-color: rgb(184, 184, 184);
+}
+/*HEADER*/
+header {
+  height: 15vh;
+  width: 75%;
+  display: flex;
+}
+.search {
+  width: 45%;
+  height: 98%;
+}
+.filter {
+  width: 15%;
+  height: 100%;
+  background-color: grey;
+  border: 2px black solid;
+  border-right: 1px black solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.filter img {
+  width: 6%;
+  position: absolute;
+}
+/*FOOTER*/
+footer {
+  height: 15vh;
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+}
+.pokePage {
+  height: 100%;
+  width: 60%;
+  font-size: 32px;
+  background-color: rgb(243, 189, 90);
+  border: 2px black solid;
+  border-inline: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*BUTTONS*/
+.back {
+  width: 20%;
+  height: 100%;
+  background-color: orange;
+  border: 2px black solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back img {
+  width: 15%;
+  height: 25%;
+  position: absolute;
+  transform: rotate(180deg);
+}
+.next {
+  width: 20%;
+  height: 100%;
+  background-color: orange;
+  border: 2px black solid;
+  border-left: 1px black solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.next img {
+  width: 15%;
+  height: 25%;
+  position: absolute;
+}
