@@ -15,45 +15,58 @@ main {
   background-color: rgb(241, 241, 241);
   box-sizing: border-box;
   display: grid;
-  grid-template:
+  /* grid-template:
     repeat(auto-fit, minmax(200px, 225px)) /
-    repeat(auto-fit, minmax(200px, 225px));
+    repeat(auto-fit, minmax(200px, 225px)); */
+  grid-template:
+    repeat(auto-fit, minmax(270px, 25%)) /
+    repeat(auto-fit, minmax(270px, 25%));
   z-index: -1;
 }
-/* @media (max-width: 1400px) {
+/* Grid donde quepan 5 pokeBlocks divididos entre 1920px/384px*5 (sin contar bordes) */
+
+/* @media (max-width: 2560px) {
   main {
     grid-template:
-      repeat(auto-fit, minmax(400px, 50%)) /
-      repeat(auto-fit, minmax(400px, 50%));
+      repeat(auto-fit, minmax(384px, 20%)) /
+      repeat(auto-fit, minmax(384px, 20%));
   }
 } */
-@media (max-width: 1080px) {
+
+/* Grid donde quepan 4 pokeBlocks divididos entre 1080px/270px*4 (sin contar bordes) */
+
+@media (max-width: 1440px) {
   main {
     grid-template:
-      repeat(auto-fit, minmax(1fr, 25%))
+      repeat(auto-fit, minmax(270px, 25%))
       /
-      repeat(auto-fit, minmax(1fr, 25%));
+      repeat(auto-fit, minmax(270px, 25%));
   }
 }
-@media (max-width: 768px) {
+
+/* Grid donde quepan 3 pokeBlocks divididos entre 768px/256*3 (sin contar bordes) */
+
+@media (max-width: 1024px) {
   main {
     grid-template:
-      repeat(auto-fit, minmax(1fr, 50%))
+      repeat(auto-fit, minmax(256px, 33%))
       /
-      repeat(auto-fit, minmax(1fr, 50%));
+      repeat(auto-fit, minmax(256px, 33%));
   }
 }
+
+/* Grid donde quepan 2 pokeBlocks divididos entre 360px/180px*2 (sin contar bordes) */
+
 @media (max-width: 480px) {
   main {
     grid-template:
-      repeat(auto-fit, minmax(1fr, 50%))
+      repeat(auto-fit, minmax(180px, 50%))
       /
-      repeat(auto-fit, minmax(1fr, 50%));
+      repeat(auto-fit, minmax(180px, 50%));
   }
 }
 
 .pokeBlock {
-  margin: 20px;
   height: 200px;
   width: 200px;
   border: 1px rgb(80, 80, 80) solid;
