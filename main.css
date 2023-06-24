@@ -62,6 +62,9 @@ main {
 .name {
   font-size: 18px;
 }
+.spriteP {
+  scale: 1.5;
+}
 .typeContainer {
   display: flex;
   margin-bottom: 2.5%;
@@ -178,7 +181,7 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-.pokePage {
+.pageContainer {
   height: 100%;
   width: 80%;
   font-size: 32px;
