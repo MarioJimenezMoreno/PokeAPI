@@ -1,3 +1,4 @@
+/* GLOBAL */
 body {
   margin: 0px;
   height: 100%;
@@ -6,72 +7,146 @@ body {
   align-items: center;
   flex-direction: column;
   background-color: aliceblue;
+  user-select: none;
 }
+.noSupport {
+  position: absolute;
+  visibility: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 99;
+}
+
 /*MAIN*/
 main {
+  margin-top: 3px;
   width: 75%;
   height: auto;
   border-inline: 1px black solid;
   background-color: rgb(241, 241, 241);
   box-sizing: border-box;
   display: grid;
-  /* grid-template:
-    repeat(auto-fit, minmax(200px, 225px)) /
-    repeat(auto-fit, minmax(200px, 225px)); */
-  grid-template:
-    repeat(auto-fit, minmax(270px, 25%)) /
-    repeat(auto-fit, minmax(270px, 25%));
+  justify-content: center;
   z-index: -1;
 }
-/* Grid donde quepan 5 pokeBlocks divididos entre 1920px/384px*5 (sin contar bordes) */
 
-/* @media (max-width: 2560px) {
-  main {
-    grid-template:
-      repeat(auto-fit, minmax(384px, 20%)) /
-      repeat(auto-fit, minmax(384px, 20%));
-  }
-} */
-
-/* Grid donde quepan 4 pokeBlocks divididos entre 1080px/270px*4 (sin contar bordes) */
-
-@media (max-width: 1440px) {
-  main {
-    grid-template:
-      repeat(auto-fit, minmax(270px, 25%))
-      /
-      repeat(auto-fit, minmax(270px, 25%));
-  }
-}
-
-/* Grid donde quepan 3 pokeBlocks divididos entre 768px/256*3 (sin contar bordes) */
-
-@media (max-width: 1024px) {
-  main {
-    grid-template:
-      repeat(auto-fit, minmax(256px, 33%))
-      /
-      repeat(auto-fit, minmax(256px, 33%));
-  }
-}
-
-/* Grid donde quepan 2 pokeBlocks divididos entre 360px/180px*2 (sin contar bordes) */
-
-@media (max-width: 480px) {
-  main {
-    grid-template:
-      repeat(auto-fit, minmax(180px, 50%))
-      /
-      repeat(auto-fit, minmax(180px, 50%));
-  }
-}
-
+/* POKEBLOCK */
 .pokeBlock {
-  height: 200px;
-  width: 200px;
+  align-self: center;
+  justify-self: center;
+  margin-top: 6px;
   border: 1px rgb(80, 80, 80) solid;
-  background-color: rgb(184, 184, 184);
+  background-color: rgb(231, 230, 230);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  font-family: "PKMN RBYGSC";
 }
+.nameContainer {
+  display: flex;
+  margin-top: 10%;
+}
+.num {
+  font-size: 18px;
+  margin-right: 5%;
+}
+.name {
+  font-size: 18px;
+}
+.typeContainer {
+  display: flex;
+  margin-bottom: 2.5%;
+}
+
+/* MEDIAQUERYS */
+@media (max-width: 463px) {
+  .noSupport {
+    visibility: visible;
+  }
+  main,
+  header,
+  footer {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 464px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(20, 1fr) 10px;
+  }
+  .pokeBlock {
+    margin-top: 10px;
+    height: 338px;
+    width: 338px;
+  }
+}
+
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(10, 1fr) 8px;
+  }
+  .pokeBlock {
+    margin-top: 8px;
+    height: 270px;
+    width: 270px;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(7, 1fr) 6px;
+  }
+  .pokeBlock {
+    height: 240.66px;
+    width: 240.66px;
+  }
+}
+
+@media (min-width: 1440px) {
+  main {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr) 6px;
+  }
+  .pokeBlock {
+    height: 255.5px;
+    width: 255.5px;
+  }
+}
+
+@media (min-width: 1920px) {
+  main {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr) 6px;
+  }
+  .pokeBlock {
+    height: 274px;
+    width: 274px;
+  }
+}
+
+@media (min-width: 2560px) {
+  main {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr) 6px;
+  }
+  .pokeBlock {
+    height: 369px;
+    width: 369px;
+  }
+}
+
 /*HEADER*/
 header {
   height: 15vh;
@@ -79,7 +154,7 @@ header {
   display: flex;
 }
 .search {
-  width: 45%;
+  width: 65%;
   height: 98%;
 }
 .filter {
@@ -105,7 +180,7 @@ footer {
 }
 .pokePage {
   height: 100%;
-  width: 60%;
+  width: 80%;
   font-size: 32px;
   background-color: rgb(243, 189, 90);
   border: 2px black solid;
@@ -116,7 +191,7 @@ footer {
 }
 /*BUTTONS*/
 .back {
-  width: 20%;
+  width: 10%;
   height: 100%;
   background-color: orange;
   border: 2px black solid;
@@ -125,13 +200,13 @@ footer {
   justify-content: center;
 }
 .back img {
-  width: 15%;
-  height: 25%;
+  width: 5%;
+  height: 10%;
   position: absolute;
   transform: rotate(180deg);
 }
 .next {
-  width: 20%;
+  width: 10%;
   height: 100%;
   background-color: orange;
   border: 2px black solid;
@@ -141,7 +216,7 @@ footer {
   justify-content: center;
 }
 .next img {
-  width: 15%;
-  height: 25%;
+  width: 5%;
+  height: 10%;
   position: absolute;
 }
