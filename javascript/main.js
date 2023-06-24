@@ -1,12 +1,43 @@
 "use strict";
 const main = document.querySelector("main");
-const typesP = document.querySelectorAll(".type");
-for (let i = 1; i < 20; i++) {
-    fetch("https://pokeapi.co/api/v2/pokemon/" + i)
-        .then((data) => data.json())
-        .then((pokemon) => {
-        createPokeBlock(pokemon);
-    });
+const firstPoke = document.querySelector(".firstPoke");
+const lastPoke = document.querySelector(".lastPoke");
+const btnsNext = document.querySelectorAll(".nextBtn");
+const btnsBack = document.querySelectorAll(".backBtn");
+let fp = true;
+let firstPage;
+let currentPage = 1;
+let lastPage;
+window.onload = () => {
+    loadPage();
+};
+btnsNext.forEach((btn) => {
+    btn.onclick = () => {
+        console.log("hola");
+        currentPage++;
+        loadPage();
+    };
+});
+btnsBack.forEach((btn) => {
+    btn.onclick = () => {
+        if (currentPage > 1) {
+            currentPage--;
+            loadPage();
+        }
+    };
+});
+function loadPage() {
+    if (main) {
+        main.innerHTML = "";
+    }
+    for (let i = currentPage * 20 - 19; i <= currentPage * 20; i++) {
+        fetch("https://pokeapi.co/api/v2/pokemon/" + i)
+            .then((data) => data.json())
+            .then((pokemon) => {
+            pageSetup(pokemon);
+            createPokeBlock(pokemon);
+        });
+    }
 }
 function createPokeBlock(pokemon) {
     const pokeBlock = document.createElement("div");
@@ -37,6 +68,20 @@ function createPokeBlock(pokemon) {
     typeContainer.appendChild(type);
     pokeBlock.appendChild(typeContainer);
     main === null || main === void 0 ? void 0 : main.appendChild(pokeBlock);
+}
+function pageSetup(pokemon) {
+    if (firstPoke && lastPoke) {
+        fp
+            ? ((firstPage = pokemon.id),
+                (firstPoke.textContent = pokemon.id + "-"),
+                (fp = false))
+            : false;
+        console.log(pokemon.id);
+        console.log(firstPage);
+        pokemon.id - firstPage == 19
+            ? ((lastPoke.textContent = pokemon.id), (fp = true))
+            : false;
+    }
 }
 /* CONSOLE LOGS PARA FETCH */
 // console.log(pokemon);

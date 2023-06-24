@@ -1,14 +1,53 @@
 const main: HTMLElement | null = document.querySelector("main");
-const typesP = document.querySelectorAll(".type");
+const firstPoke: HTMLElement | null = document.querySelector(".firstPoke");
+const lastPoke: HTMLElement | null = document.querySelector(".lastPoke");
+const btnsNext = document.querySelectorAll(
+  ".nextBtn"
+) as NodeListOf<HTMLElement>;
+const btnsBack = document.querySelectorAll(
+  ".backBtn"
+) as NodeListOf<HTMLElement>;
 
-for (let i = 1; i < 20; i++) {
-fetch("https://pokeapi.co/api/v2/pokemon/" + i)
-  .then((data) => data.json())
-  .then((pokemon) => {
-      createPokeBlock(pokemon);
-  });
+let fp: boolean = true;
+let firstPage: number;
+let currentPage: number = 1;
+let lastPage: number;
+window.onload = () => {
+  loadPage();
+};
+
+btnsNext.forEach((btn) => {
+  btn.onclick = () => {
+    console.log("hola");
+    currentPage++;
+    loadPage();
+  };
+});
+
+btnsBack.forEach((btn) => {
+  btn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      loadPage();
+    }
+  };
+});
+
+function loadPage() {
+  if (main) {
+    main.innerHTML = "";
+  }
+  for (let i = currentPage * 20 - 19; i <= currentPage * 20; i++) {
+    fetch("https://pokeapi.co/api/v2/pokemon/" + i)
+      .then((data) => data.json())
+      .then((pokemon) => {
+        pageSetup(pokemon);
+        createPokeBlock(pokemon);
+      });
+  }
 }
-function createPokeBlock(pokemon:any) {
+
+function createPokeBlock(pokemon: any) {
   const pokeBlock = document.createElement("div");
   pokeBlock.classList.add("pokeBlock");
 
@@ -46,7 +85,21 @@ function createPokeBlock(pokemon:any) {
   pokeBlock.appendChild(typeContainer);
 
   main?.appendChild(pokeBlock);
+}
 
+function pageSetup(pokemon: any) {
+  if (firstPoke && lastPoke) {
+    fp
+      ? ((firstPage = pokemon.id),
+        (firstPoke.textContent = pokemon.id + "-"),
+        (fp = false))
+      : false;
+    console.log(pokemon.id);
+    console.log(firstPage);
+    pokemon.id - firstPage == 19
+      ? ((lastPoke.textContent = pokemon.id), (fp = true))
+      : false;
+  }
 }
 
 /* CONSOLE LOGS PARA FETCH */

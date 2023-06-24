@@ -193,7 +193,7 @@ footer {
   align-items: center;
 }
 /*BUTTONS*/
-.back {
+.backBtn {
   width: 10%;
   height: 100%;
   background-color: orange;
@@ -202,13 +202,13 @@ footer {
   align-items: center;
   justify-content: center;
 }
-.back img {
+.backBtn img {
   width: 5%;
   height: 10%;
   position: absolute;
   transform: rotate(180deg);
 }
-.next {
+.nextBtn {
   width: 10%;
   height: 100%;
   background-color: orange;
@@ -218,7 +218,7 @@ footer {
   align-items: center;
   justify-content: center;
 }
-.next img {
+.nextBtn img {
   width: 5%;
   height: 10%;
   position: absolute;
