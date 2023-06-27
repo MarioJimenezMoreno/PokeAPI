@@ -2,14 +2,28 @@
 const main = document.querySelector("main");
 const firstPoke = document.querySelector(".firstPoke");
 const lastPoke = document.querySelector(".lastPoke");
+const filterTypes = document.querySelectorAll(".type");
 const btnsNext = document.querySelectorAll(".nextBtn");
 const btnsBack = document.querySelectorAll(".backBtn");
 let lastPage;
 let currentPage = 1;
 let firstPage = null;
+let types = [];
 window.onload = () => {
     loadPage();
 };
+filterTypes.forEach((type) => {
+    type.onfocus = () => {
+        console.log("hola");
+        console.log(type.id);
+        types.push(type.id);
+    };
+    type.onblur = () => {
+        console.log("adios");
+        console.log(type.id);
+        types.splice(types.findIndex((element) => element.id === type.id), 1);
+    };
+});
 btnsNext.forEach((btn) => {
     btn.onclick = () => {
         currentPage++;
@@ -30,8 +44,7 @@ function loadPage() {
     }
     let fetchPromises = [];
     for (let i = currentPage * 20 - 19; i <= currentPage * 20; i++) {
-        fetchPromises.push(fetch("https://pokeapi.co/api/v2/pokemon/" + i)
-            .then((data) => data.json()));
+        fetchPromises.push(fetch("https://pokeapi.co/api/v2/pokemon/" + i).then((data) => data.json()));
     }
     Promise.all(fetchPromises).then((results) => {
         results.forEach((pokemon) => {

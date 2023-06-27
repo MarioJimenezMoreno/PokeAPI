@@ -1,6 +1,9 @@
 const main: HTMLElement | null = document.querySelector("main");
 const firstPoke: HTMLElement | null = document.querySelector(".firstPoke");
 const lastPoke: HTMLElement | null = document.querySelector(".lastPoke");
+const filterTypes = document.querySelectorAll(
+  ".type"
+) as NodeListOf<HTMLElement>;
 const btnsNext = document.querySelectorAll(
   ".nextBtn"
 ) as NodeListOf<HTMLElement>;
@@ -11,10 +14,27 @@ const btnsBack = document.querySelectorAll(
 let lastPage: number;
 let currentPage: number = 1;
 let firstPage: number | null = null;
+let types: any[] = [];
 
 window.onload = () => {
   loadPage();
 };
+
+filterTypes.forEach((type) => {
+  type.onfocus = () => {
+    console.log("hola");
+    console.log(type.id);
+    types.push(type.id);
+  };
+  type.onblur = () => {
+    console.log("adios");
+    console.log(type.id);
+    types.splice(
+      types.findIndex((element) => element.id === type.id),
+      1
+    );
+  };
+});
 
 btnsNext.forEach((btn) => {
   btn.onclick = () => {
@@ -41,16 +61,17 @@ function loadPage() {
 
   for (let i = currentPage * 20 - 19; i <= currentPage * 20; i++) {
     fetchPromises.push(
-      fetch("https://pokeapi.co/api/v2/pokemon/" + i)
-        .then((data) => data.json())  
+      fetch("https://pokeapi.co/api/v2/pokemon/" + i).then((data) =>
+        data.json()
+      )
     );
   }
 
   Promise.all(fetchPromises).then((results) => {
-    results.forEach((pokemon) =>{
-        pageSetup(pokemon);
-        createPokeBlock(pokemon);
-    })
+    results.forEach((pokemon) => {
+      pageSetup(pokemon);
+      createPokeBlock(pokemon);
+    });
   });
 }
 
@@ -99,8 +120,7 @@ function pageSetup(pokemon: any) {
     if (firstPage === null) {
       firstPage = pokemon.id;
       firstPoke.textContent = pokemon.id + "-";
-    } 
-    else if (pokemon.id - firstPage === 19) {
+    } else if (pokemon.id - firstPage === 19) {
       lastPoke.textContent = pokemon.id;
       firstPage = null;
     }
