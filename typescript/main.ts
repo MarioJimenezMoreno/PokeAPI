@@ -8,17 +8,16 @@ const btnsBack = document.querySelectorAll(
   ".backBtn"
 ) as NodeListOf<HTMLElement>;
 
-let fp: boolean = true;
-let firstPage: number;
-let currentPage: number = 1;
 let lastPage: number;
+let currentPage: number = 1;
+let firstPage: number | null = null;
+
 window.onload = () => {
   loadPage();
 };
 
 btnsNext.forEach((btn) => {
   btn.onclick = () => {
-    console.log("hola");
     currentPage++;
     loadPage();
   };
@@ -37,14 +36,22 @@ function loadPage() {
   if (main) {
     main.innerHTML = "";
   }
+
+  let fetchPromises: Promise<any>[] = [];
+
   for (let i = currentPage * 20 - 19; i <= currentPage * 20; i++) {
-    fetch("https://pokeapi.co/api/v2/pokemon/" + i)
-      .then((data) => data.json())
-      .then((pokemon) => {
+    fetchPromises.push(
+      fetch("https://pokeapi.co/api/v2/pokemon/" + i)
+        .then((data) => data.json())  
+    );
+  }
+
+  Promise.all(fetchPromises).then((results) => {
+    results.forEach((pokemon) =>{
         pageSetup(pokemon);
         createPokeBlock(pokemon);
-      });
-  }
+    })
+  });
 }
 
 function createPokeBlock(pokemon: any) {
@@ -89,16 +96,14 @@ function createPokeBlock(pokemon: any) {
 
 function pageSetup(pokemon: any) {
   if (firstPoke && lastPoke) {
-    fp
-      ? ((firstPage = pokemon.id),
-        (firstPoke.textContent = pokemon.id + "-"),
-        (fp = false))
-      : false;
-    console.log(pokemon.id);
-    console.log(firstPage);
-    pokemon.id - firstPage == 19
-      ? ((lastPoke.textContent = pokemon.id), (fp = true))
-      : false;
+    if (firstPage === null) {
+      firstPage = pokemon.id;
+      firstPoke.textContent = pokemon.id + "-";
+    } 
+    else if (pokemon.id - firstPage === 19) {
+      lastPoke.textContent = pokemon.id;
+      firstPage = null;
+    }
   }
 }
 
