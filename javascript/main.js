@@ -2,26 +2,43 @@
 const main = document.querySelector("main");
 const firstPoke = document.querySelector(".firstPoke");
 const lastPoke = document.querySelector(".lastPoke");
+const shinyInput = document.querySelector(".shiny");
+const pageElements = document.querySelector(".elements");
 const filterTypes = document.querySelectorAll(".type");
 const btnsNext = document.querySelectorAll(".nextBtn");
 const btnsBack = document.querySelectorAll(".backBtn");
 let lastPage;
 let currentPage = 1;
 let firstPage = null;
-let types = [];
+let typesFiltered = [];
+let shiny = false;
 window.onload = () => {
     loadPage();
 };
+pageElements.onchange = () => {
+    loadPage();
+};
+shinyInput.onchange = () => {
+    if (shinyInput.checked) {
+        shiny = true;
+        loadPage();
+    }
+    else {
+        shiny = false;
+        loadPage();
+    }
+};
 filterTypes.forEach((type) => {
-    type.onfocus = () => {
-        console.log("hola");
-        console.log(type.id);
-        types.push(type.id);
-    };
-    type.onblur = () => {
-        console.log("adios");
-        console.log(type.id);
-        types.splice(types.findIndex((element) => element.id === type.id), 1);
+    type.onchange = () => {
+        if (type.checked) {
+            typesFiltered.push(type.id);
+            console.log(typesFiltered);
+        }
+        else {
+            typesFiltered.splice(typesFiltered.findIndex((element) => element === type.id), 1);
+            console.log(typesFiltered);
+        }
+        loadPage();
     };
 });
 btnsNext.forEach((btn) => {
@@ -42,14 +59,30 @@ function loadPage() {
     if (main) {
         main.innerHTML = "";
     }
+    let i = 1;
     let fetchPromises = [];
-    for (let i = currentPage * 20 - 19; i <= currentPage * 20; i++) {
-        fetchPromises.push(fetch("https://pokeapi.co/api/v2/pokemon/" + i).then((data) => data.json()));
+    while (i <= pageElements.valueAsNumber) {
+        console.log("i:" + i);
+        fetchPromises.push(fetch("https://pokeapi.co/api/v2/pokemon/" + i)
+            .then((data) => data.json())
+            .then((pokemon) => {
+            console.log(pokemon);
+            console.log(pokemon.types[0].type.name);
+            console.log(typesFiltered.length);
+            if (pokemon.types.some((type) => typesFiltered.includes(type.type.name)) ||
+                typesFiltered.length === 0) {
+                console.log("fetch:" + fetchPromises.length);
+                return pokemon;
+            }
+        }));
+        i++;
     }
     Promise.all(fetchPromises).then((results) => {
         results.forEach((pokemon) => {
-            pageSetup(pokemon);
-            createPokeBlock(pokemon);
+            // pageSetup(pokemon);
+            if (pokemon && pokemon.id) {
+                createPokeBlock(pokemon);
+            }
         });
     });
 }
@@ -69,7 +102,12 @@ function createPokeBlock(pokemon) {
     pokeBlock.appendChild(nameContainer);
     const spriteP = document.createElement("img");
     spriteP.classList.add("spriteP");
-    spriteP.src = pokemon.sprites.front_default;
+    if (shiny == true) {
+        spriteP.src = pokemon.sprites.front_shiny;
+    }
+    else {
+        spriteP.src = pokemon.sprites.front_default;
+    }
     pokeBlock.appendChild(spriteP);
     const typeContainer = document.createElement("div");
     typeContainer.classList.add("typeContainer");
@@ -81,24 +119,14 @@ function createPokeBlock(pokemon) {
     }
     typeContainer.appendChild(type);
     pokeBlock.appendChild(typeContainer);
-    main === null || main === void 0 ? void 0 : main.appendChild(pokeBlock);
+    main.appendChild(pokeBlock);
 }
-function pageSetup(pokemon) {
-    if (firstPoke && lastPoke) {
-        if (firstPage === null) {
-            firstPage = pokemon.id;
-            firstPoke.textContent = pokemon.id + "-";
-        }
-        else if (pokemon.id - firstPage === 19) {
-            lastPoke.textContent = pokemon.id;
-            firstPage = null;
-        }
-    }
-}
-/* CONSOLE LOGS PARA FETCH */
-// console.log(pokemon);
-// console.log(pokemon.id);
-// console.log(pokemon.name);
-// console.log(pokemon.sprites.front_default);
-// console.log(pokemon.types[0].type.url);
-// console.log(pokemon.types[1].type.url);
+// function pageSetup(pokemon: any) {
+//   if (firstPage === null) {
+//     firstPage = pokemon.id;
+//     firstPoke.textContent = pokemon.id + "-";
+//   } else if (pokemon.id - firstPage === 19) {
+//     lastPoke.textContent = pokemon.id;
+//     firstPage = null;
+//   }
+// }

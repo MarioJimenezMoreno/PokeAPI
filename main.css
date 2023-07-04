@@ -67,6 +67,7 @@ nav span {
 
 /*MAIN*/
 main {
+  min-height: 1000px;
   margin-top: 3px;
   width: 75%;
   height: auto;
@@ -198,22 +199,9 @@ header {
   display: flex;
 }
 .search {
-  width: 65%;
+  width: 80%;
   height: 98%;
-}
-.filter {
-  width: 15%;
-  height: 100%;
-  background-color: grey;
-  border: 2px black solid;
-  border-right: 1px black solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.filter img {
-  width: 6%;
-  position: absolute;
+  font-size: 50px;
 }
 /*FOOTER*/
 footer {
