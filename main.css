@@ -252,3 +252,7 @@ footer {
   height: 10%;
   position: absolute;
 }
+.disabled {
+  pointer-events: none;
+  background-color: grey;
+}
