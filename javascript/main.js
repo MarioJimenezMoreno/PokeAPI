@@ -1,9 +1,11 @@
 "use strict";
-const main = document.querySelector("main");
+const main_main = document.querySelector("main_main");
+const main_profile = document.querySelector("main_profile");
 const firstPoke = document.querySelector(".firstPoke");
 const lastPoke = document.querySelector(".lastPoke");
 const shinyInput = document.querySelector(".shiny");
 const pageElements = document.querySelector(".elements");
+const loader = document.querySelector(".loaderContainer");
 const filterTypes = document.querySelectorAll(".type");
 const btnsNext = document.querySelectorAll(".nextBtn");
 const btnsBack = document.querySelectorAll(".backBtn");
@@ -14,7 +16,6 @@ let maxPages = 0;
 let typesFiltered = [];
 let fetchPromises = [];
 let shinySprite = false;
-let defaultLoad = true;
 /* FIRST WINDOW LOAD */
 window.onload = () => {
     loadPage();
@@ -66,14 +67,14 @@ btnsBack.forEach((btn) => {
 /* LOAD POKEDEX DATA */
 function loadPage() {
     /* REMOVE PREVIOUS ELEMENTS */
-    main.innerHTML = "";
+    main_main.innerHTML = "";
     /* DEFAULT SETUP */
-    if (defaultLoad) {
-        defaultLoad = false;
+    if (fetchPromises.length == 0) {
         for (let i = 1; i < 1011; i++) {
             fetchPromises.push(fetch("https://pokeapi.co/api/v2/pokemon/" + i).then((data) => data.json()));
         }
         Promise.all(fetchPromises).then((results) => {
+            loader.style.display = "none";
             results.slice(0, 20).forEach((pokemon) => {
                 createPokeBlock(pokemon);
             });
@@ -125,7 +126,7 @@ function createPokeBlock(pokemon) {
     nameP.textContent = pokemon.name.toUpperCase();
     nameContainer.appendChild(nameP);
     pokeBlock.appendChild(nameContainer);
-    /* CREATE SPIRE */
+    /* CREATE SPRITE */
     const spriteP = document.createElement("img");
     spriteP.classList.add("spriteP");
     /* SET DEFAULT SPRITE OR SHINY SPRITE */
@@ -149,7 +150,7 @@ function createPokeBlock(pokemon) {
     }
     typeContainer.appendChild(type);
     pokeBlock.appendChild(typeContainer);
-    main.appendChild(pokeBlock);
+    main_main.appendChild(pokeBlock);
 }
 // function pageSetup(pokemon: any) {
 //   if (firstPage === null) {
@@ -160,3 +161,47 @@ function createPokeBlock(pokemon) {
 //     firstPage = null;
 //   }
 // }
+function createPokeProfile(pokemon) {
+    /* CREATE POKEMON CONTAINER */
+    const pokeBlock = document.createElement("div");
+    pokeBlock.classList.add("pokeBlock");
+    /* CREATE TEXT CONTAINER */
+    const nameContainer = document.createElement("div");
+    nameContainer.classList.add("nameContainer");
+    /* CREATE ID */
+    const numP = document.createElement("div");
+    numP.classList.add("numP");
+    numP.textContent = "#" + pokemon.id;
+    nameContainer.appendChild(numP);
+    /* CREATE NAME */
+    const nameP = document.createElement("div");
+    nameP.classList.add("nameP");
+    nameP.textContent = pokemon.name.toUpperCase();
+    nameContainer.appendChild(nameP);
+    pokeBlock.appendChild(nameContainer);
+    /* CREATE SPRITE */
+    const spriteP = document.createElement("img");
+    spriteP.classList.add("spriteP");
+    /* SET DEFAULT SPRITE OR SHINY SPRITE */
+    if (shinySprite == true) {
+        spriteP.src = pokemon.sprites.front_shiny;
+    }
+    else {
+        spriteP.src = pokemon.sprites.front_default;
+    }
+    pokeBlock.appendChild(spriteP);
+    /* CREATE TYPE CONTAINER */
+    const typeContainer = document.createElement("div");
+    typeContainer.classList.add("typeContainer");
+    /* CREATE TYPES */
+    const type = document.createElement("div");
+    type.classList.add("type");
+    type.textContent = pokemon.types[0].type.name;
+    /* CHECK FOR SECONDARY TYPE */
+    if (pokemon.types.length > 1) {
+        type.textContent += "/" + pokemon.types[1].type.name;
+    }
+    typeContainer.appendChild(type);
+    pokeBlock.appendChild(typeContainer);
+    main_profile.appendChild(pokeBlock);
+}

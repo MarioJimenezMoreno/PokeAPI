@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Mario's Pokédex</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./Assets/pokeball.png"
+    />
     <link
       href="//db.onlinewebfonts.com/c/65780863e7302fe257df982341d6a1cb?family=PKMN+RBYGSC"
       rel="stylesheet"
@@ -12,13 +18,17 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <div class="loaderContainer">
+      <div class="loaderBackground"></div>
+      <img class="loaderImage" src="./Assets/loadPokeball.png" alt="" />
+    </div>
     <div class="noSupport">RESOLUTION NOT SUPPORTED</div>
-    <header>
-      <div class="backBtn"><img src="Arrow.png" /></div>
+    <header_main>
+      <div class="backBtn"><img src="./Assets/Arrow.png" /></div>
       <input type="text" class="search" />
-      <div class="nextBtn"><img src="Arrow.png" /></div>
-    </header>
-    <nav>
+      <div class="nextBtn"><img src="./Assets/Arrow.png" /></div>
+    </header_main>
+    <nav_main>
       <div id="elements">
         <span>ELEMENTS</span>
         <input
@@ -66,8 +76,8 @@
       <span>ICE</span>
       <input type="checkbox" class="checkbox-round type" id="dragon" />
       <span>DRAGON</span>
-    </nav>
-    <main>
+    </nav_main>
+    <main_main>
       <!-- <div class="pokeBlock">
         <div class="nameContainer">
           <div class="numP"></div>
@@ -78,15 +88,15 @@
           <div class="type"></div>
         </div>
       </div> -->
-    </main>
-    <footer>
-      <div class="backBtn"><img src="Arrow.png" /></div>
+    </main_main>
+    <footer_main>
+      <div class="backBtn"><img src="./Assets/Arrow.png" /></div>
       <div class="pageContainer">
         <div class="firstPoke"></div>
         <div class="lastPoke"></div>
       </div>
-      <div class="nextBtn"><img src="Arrow.png" /></div>
-    </footer>
+      <div class="nextBtn"><img src="./Assets/Arrow.png" /></div>
+    </footer_main>
     <script src="./javascript/main.js"></script>
   </body>
 </html>
