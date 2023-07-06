@@ -97,7 +97,7 @@ nav_main span {
 
 /*MAIN*/
 main_main {
-  min-height: 1000px;
+  min-height: 800px;
   margin-top: 3px;
   width: 75%;
   height: auto;
@@ -106,7 +106,7 @@ main_main {
   box-sizing: border-box;
   display: grid;
   justify-content: center;
-  z-index: -1;
+  padding-bottom: 6px;
 }
 
 /* POKEBLOCK */
@@ -159,7 +159,7 @@ main_main {
 @media (min-width: 464px) {
   main_main {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(20, 1fr) 10px;
+    padding-bottom: 10px;
   }
   .pokeBlock {
     margin-top: 10px;
@@ -171,7 +171,7 @@ main_main {
 @media (min-width: 768px) {
   main_main {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(10, 1fr) 8px;
+    padding-bottom: 8px;
   }
   .pokeBlock {
     margin-top: 8px;
@@ -183,7 +183,6 @@ main_main {
 @media (min-width: 1024px) {
   main_main {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(7, 1fr) 6px;
   }
   .pokeBlock {
     height: 240.66px;
@@ -194,7 +193,6 @@ main_main {
 @media (min-width: 1440px) {
   main_main {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr) 6px;
   }
   .pokeBlock {
     height: 255.5px;
@@ -205,7 +203,6 @@ main_main {
 @media (min-width: 1920px) {
   main_main {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, 1fr) 6px;
   }
   .pokeBlock {
     height: 274px;
@@ -216,7 +213,6 @@ main_main {
 @media (min-width: 2560px) {
   main_main {
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, 1fr) 6px;
   }
   .pokeBlock {
     height: 369px;
@@ -262,6 +258,7 @@ footer_main {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 .backBtn img {
   width: 5%;
@@ -278,6 +275,7 @@ footer_main {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 .nextBtn img {
   width: 5%;
