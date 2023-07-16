@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="content">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,12 +23,33 @@
       <img class="loaderImage" src="./Assets/iconPokeball.png" alt="" />
     </div>
     <div class="noSupport">RESOLUTION NOT SUPPORTED</div>
-    <header_main>
+    <div class="profileWindow">
+      <div class="closeProfile"><img src="./Assets/Arrow.png" /></div>
+      <div class="profileBody">
+        <div class="topPart">
+          <div class="backProfileBtn"><img src="./Assets/Arrow.png" /></div>
+          <div class="spritePart"></div>
+          <div class="nextProfileBtn"><img src="./Assets/Arrow.png" /></div>
+        </div>
+
+        <div class="bottomPart">
+          <div class="atk">at1</div>
+          <div class="atk">at2</div>
+          <div class="atk">at3</div>
+          <div class="atk">at4</div>
+          <div class="atk">at1</div>
+          <div class="atk">at2</div>
+          <div class="atk">at3</div>
+          <div class="atk">at4</div>
+        </div>
+      </div>
+    </div>
+    <header>
       <div class="backBtn"><img src="./Assets/Arrow.png" /></div>
       <input type="text" class="search" />
       <div class="nextBtn"><img src="./Assets/Arrow.png" /></div>
-    </header_main>
-    <nav_main>
+    </header>
+    <nav>
       <div id="elements">
         <span>ELEMENTS</span>
         <input
@@ -76,8 +97,8 @@
       <span>ICE</span>
       <input type="checkbox" class="checkbox-round type" id="dragon" />
       <span>DRAGON</span>
-    </nav_main>
-    <main_main>
+    </nav>
+    <main>
       <!-- <div class="pokeBlock">
         <div class="nameContainer">
           <div class="numP"></div>
@@ -88,15 +109,15 @@
           <div class="type"></div>
         </div>
       </div> -->
-    </main_main>
-    <footer_main>
+    </main>
+    <footer>
       <div class="backBtn"><img src="./Assets/Arrow.png" /></div>
       <div class="pageContainer">
         <div class="firstPoke"></div>
         <div class="lastPoke"></div>
       </div>
       <div class="nextBtn"><img src="./Assets/Arrow.png" /></div>
-    </footer_main>
-    <script src="./javascript/main.js"></script>
+    </footer>
+    <script type="module" src="./javascript/main.js"></script>
   </body>
 </html>

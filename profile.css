@@ -1,4 +1,4 @@
-body {
+body_profile {
   margin: 0px;
   height: 100vh;
   width: 100vw;
@@ -8,6 +8,12 @@ body {
   background-color: orange;
   user-select: none;
   font-family: "PKMN RBYGSC";
+}
+.backMenu {
+  background-color: brown;
+  height: 100px;
+  width: 100px;
+  z-index: 5;
 }
 header_profile {
   height: 50%;
