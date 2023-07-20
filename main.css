@@ -9,6 +9,7 @@ body {
   background-color: aliceblue;
   user-select: none;
   font-family: "PKMN RBYGSC";
+  cursor: url("./Assets/iconPokeball.png"), auto; /* No va */
 }
 .loaderContainer {
   position: absolute;
@@ -163,7 +164,8 @@ main {
   font-size: 18px;
 }
 .sprite {
-  scale: 1.5;
+  height: 55%;
+  width: 55%;
 }
 .typeContainer {
   display: flex;

@@ -24,6 +24,7 @@ const nameInput = document.querySelector(".nameInput");
 const spriteInput = document.querySelector(".urlInput");
 const typeOneInput = document.querySelector(".typeOneInput");
 const typeTwoInput = document.querySelector(".typeTwoInput");
+const numPreview = document.querySelector(".numPreview");
 const namePreview = document.querySelector(".namePreview");
 const spritePreview = document.querySelector(".spritePreview");
 const typeOnePreview = document.querySelector(".typeOnePreview");
@@ -114,30 +115,36 @@ filterTypes.forEach((type) => {
     };
 });
 newPokemon.onclick = () => {
-    animationController("newPokemon");
+    animationController("newPokemonWindow");
+    createPokemonController("setup");
 };
 newPokemonContainer.onclick = (event) => {
     if (event.target === newPokemonContainer) {
-        animationController("newPokemon");
+        animationController("newPokemonWindow");
     }
 };
 createPokemon.onclick = () => {
-    animationController("newPokemon");
+    createPokemonController("create");
+    animationController("newPokemonWindow");
 };
 nameInput.oninput = () => {
     namePreview.innerHTML = nameInput.value;
+    createPokemonController("check");
 };
 spriteInput.oninput = () => {
     spritePreview.src = spriteInput.value;
+    createPokemonController("check");
 };
 spritePreview.onerror = () => {
     spritePreview.src = "./Assets/Placeholder.png";
 };
 typeOneInput.onchange = () => {
     typeOnePreview.innerHTML = typeOneInput.value;
+    createPokemonController("check");
 };
 typeTwoInput.onchange = () => {
     typeTwoPreview.innerHTML = typeTwoInput.value;
+    createPokemonController("check");
 };
 /* LOAD POKEDEX DATA NUEVO */
 function loadMain() {
@@ -369,7 +376,7 @@ function animationController(anim) {
                 profileWindow.style.animation = "closeTeaseDown 0.5s forwards";
             }
             break;
-        case "newPokemon":
+        case "newPokemonWindow":
             if (closedWindow) {
                 fader.style.animation = "";
                 fader.style.zIndex = "4";
@@ -395,6 +402,92 @@ function clearInfo(info) {
         case "profile":
             spritePart.innerHTML = "";
             bottomPart.innerHTML = "";
+            break;
+    }
+}
+function createPokemonController(state) {
+    switch (state) {
+        case "check":
+            if (typeOneInput.value !== "" &&
+                typeTwoInput.classList.contains("disabled")) {
+                typeTwoInput.classList.remove("disabled");
+            }
+            else if (typeOneInput.value === "" &&
+                !typeTwoInput.classList.contains("disabled")) {
+                typeTwoInput.value = "";
+                typeOnePreview.innerHTML = "type1";
+                typeTwoPreview.innerHTML = "type2";
+                typeTwoInput.classList.add("disabled");
+            }
+            if (nameInput.value !== "" &&
+                typeOneInput.value !== "" &&
+                createPokemon.classList.contains("disabled")) {
+                createPokemon.classList.remove("disabled");
+            }
+            else if (nameInput.value === "" || typeOneInput.value === "") {
+                createPokemon.classList.add("disabled");
+            }
+            break;
+        case "setup":
+            createPokemon.classList.add("disabled");
+            typeTwoInput.classList.add("disabled");
+            numPreview.innerHTML = "#" + (fetchPromises.length + 1).toString();
+            nameInput.value = "";
+            namePreview.innerHTML = "NAME";
+            spriteInput.value = "";
+            spritePreview.src = "./Assets/Placeholder.png";
+            typeOneInput.value = "";
+            typeOnePreview.innerHTML = "type1";
+            typeTwoInput.value = "";
+            typeTwoPreview.innerHTML = "type2";
+            break;
+        case "create":
+            const newPokemon = {
+                id: fetchPromises.length + 1,
+                name: nameInput.value,
+                sprites: {
+                    front_shiny: spritePreview.src,
+                    front_default: spritePreview.src,
+                },
+                stats: {
+                    hp: {
+                        name: "hp",
+                        value: 100,
+                    },
+                    attack: {
+                        name: "attack",
+                        value: 100,
+                    },
+                    defense: {
+                        name: "defense",
+                        value: 100,
+                    },
+                    special_attack: {
+                        name: "special_attack",
+                        value: 100,
+                    },
+                    special_defense: {
+                        name: "special_defense",
+                        value: 100,
+                    },
+                    speed: {
+                        name: "speed",
+                        value: 100,
+                    },
+                },
+                types: [
+                    {
+                        type: { name: typeOneInput.value },
+                    },
+                    ...(typeTwoInput.value !== ""
+                        ? [{ type: { name: typeTwoInput.value } }]
+                        : []),
+                ],
+            };
+            fetchPromises.push(newPokemon);
+            console.log(fetchPromises);
+            storageManager("upload");
+            loadMain();
             break;
     }
 }
