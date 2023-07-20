@@ -26,6 +26,79 @@
       </div>
     </div>
     <div class="noSupport">RESOLUTION NOT SUPPORTED</div>
+    <div class="newPokemonContainer">
+      <div class="newPokemonWindow">
+        <form action="" method="post" class="formNewPoke">
+          <span>NAME</span>
+          <input
+            type="text"
+            name="name"
+            class="nameInput"
+            maxlength="10"
+            required
+          />
+          <span>SPRITE</span>
+          <input type="url" name="image" class="urlInput" required />
+          <span>FIRST TYPE</span>
+          <select name="type1" class="typeOneInput" required>
+            <option value="">Selecciona un tipo</option>
+            <option value="normal">Normal</option>
+            <option value="fighting">Lucha</option>
+            <option value="flying">Volador</option>
+            <option value="poison">Veneno</option>
+            <option value="ground">Tierra</option>
+            <option value="rock">Roca</option>
+            <option value="bug">Bicho</option>
+            <option value="ghost">Fantasma</option>
+            <option value="steel">Acero</option>
+            <option value="fire">Fuego</option>
+            <option value="water">Agua</option>
+            <option value="grass">Planta</option>
+            <option value="electric">Eléctrico</option>
+            <option value="psychic">Psíquico</option>
+            <option value="ice">Hielo</option>
+            <option value="dragon">Dragón</option>
+            <option value="dark">Siniestro</option>
+            <option value="fairy">Hada</option>
+          </select>
+          <span>SECOND TYPE</span>
+          <select name="type2" class="typeTwoInput">
+            <option value="">Selecciona un tipo</option>
+            <option value="normal">Normal</option>
+            <option value="fighting">Lucha</option>
+            <option value="flying">Volador</option>
+            <option value="poison">Veneno</option>
+            <option value="ground">Tierra</option>
+            <option value="rock">Roca</option>
+            <option value="bug">Bicho</option>
+            <option value="ghost">Fantasma</option>
+            <option value="steel">Acero</option>
+            <option value="fire">Fuego</option>
+            <option value="water">Agua</option>
+            <option value="grass">Planta</option>
+            <option value="electric">Eléctrico</option>
+            <option value="psychic">Psíquico</option>
+            <option value="ice">Hielo</option>
+            <option value="dragon">Dragón</option>
+            <option value="dark">Siniestro</option>
+            <option value="fairy">Hada</option>
+          </select>
+          <button type="submit" class="createPokemon">Create</button>
+        </form>
+        <div class="pokeBlockPreview">
+          <div class="nameContainerPreview">
+            <div class="numPreview">#1011</div>
+            <div class="namePreview"></div>
+          </div>
+          <img class="spritePreview" src="./Assets/Placeholder.png" />
+          <div class="typeContainerPreview">
+            <div class="typeOnePreview">type 1</div>
+            <span>/</span>
+            <div class="typeTwoPreview">type 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="profileWindow">
       <div class="closeProfile"><img src="./Assets/Arrow.png" /></div>
       <div class="profileBody">
@@ -34,7 +107,6 @@
           <div class="spritePart"></div>
           <div class="nextProfileBtn"><img src="./Assets/Arrow.png" /></div>
         </div>
-
         <div class="bottomPart"></div>
       </div>
     </div>
@@ -45,53 +117,58 @@
       <div class="nextBtn"><img src="./Assets/Arrow.png" /></div>
     </header>
     <nav>
-      <div id="elements">
-        <span>ELEMENTS</span>
-        <input
-          type="range"
-          name="pageRange"
-          min="10"
-          max="50"
-          value="20"
-          class="elements"
-        />
-      </div>
-      <input type="checkbox" class="checkbox-round shiny" id="shiny" />
+      <span id="elements">ELEMENTS</span>
+      <input
+        type="range"
+        name="pageRange"
+        min="10"
+        max="50"
+        value="20"
+        class="elements"
+      />
       <span>SHINY</span>
-      <input type="checkbox" class="checkbox-round type" id="grass" />
+      <input type="checkbox" class="checkbox-round shiny" id="shiny" />
       <span>GRASS</span>
-      <input type="checkbox" class="checkbox-round type" id="poison" />
+      <input type="checkbox" class="checkbox-round type" id="grass" />
       <span>POISON</span>
-      <input type="checkbox" class="checkbox-round type" id="fire" />
+      <input type="checkbox" class="checkbox-round type" id="poison" />
       <span>FIRE</span>
-      <input type="checkbox" class="checkbox-round type" id="water" />
+      <input type="checkbox" class="checkbox-round type" id="fire" />
       <span>WATER</span>
-      <input type="checkbox" class="checkbox-round type" id="rock" />
+      <input type="checkbox" class="checkbox-round type" id="water" />
       <span>ROCK</span>
-      <input type="checkbox" class="checkbox-round type" id="bug" />
+      <input type="checkbox" class="checkbox-round type" id="rock" />
       <span>BUG</span>
-      <input type="checkbox" class="checkbox-round type" id="flying" />
+      <input type="checkbox" class="checkbox-round type" id="bug" />
       <span>FLYING</span>
-      <input type="checkbox" class="checkbox-round type" id="normal" />
+      <input type="checkbox" class="checkbox-round type" id="flying" />
       <span>NORMAL</span>
-      <input type="checkbox" class="checkbox-round type" id="ground" />
+      <input type="checkbox" class="checkbox-round type" id="normal" />
       <span>GROUND</span>
-      <input type="checkbox" class="checkbox-round type" id="electric" />
+      <input type="checkbox" class="checkbox-round type" id="ground" />
       <span>ELECTRIC</span>
-      <input type="checkbox" class="checkbox-round type" id="fairy" />
+      <input type="checkbox" class="checkbox-round type" id="electric" />
       <span>FAIRY</span>
-      <input type="checkbox" class="checkbox-round type" id="ghost" />
+      <input type="checkbox" class="checkbox-round type" id="fairy" />
       <span>GHOST</span>
-      <input type="checkbox" class="checkbox-round type" id="fighting" />
+      <input type="checkbox" class="checkbox-round type" id="ghost" />
       <span>FIGHTING</span>
-      <input type="checkbox" class="checkbox-round type" id="psychic" />
+      <input type="checkbox" class="checkbox-round type" id="fighting" />
       <span>PSYCHIC</span>
-      <input type="checkbox" class="checkbox-round type" id="steel" />
+      <input type="checkbox" class="checkbox-round type" id="psychic" />
       <span>STEEL</span>
-      <input type="checkbox" class="checkbox-round type" id="ice" />
+      <input type="checkbox" class="checkbox-round type" id="steel" />
       <span>ICE</span>
-      <input type="checkbox" class="checkbox-round type" id="dragon" />
+      <input type="checkbox" class="checkbox-round type" id="ice" />
       <span>DRAGON</span>
+      <input type="checkbox" class="checkbox-round type" id="dragon" />
+      <div id="create">
+        <span
+          >CREATE <br />
+          POKEMON</span
+        >
+        <button class="newPokemon">New</button>
+      </div>
     </nav>
     <main>
       <!-- <div class="pokeBlock">

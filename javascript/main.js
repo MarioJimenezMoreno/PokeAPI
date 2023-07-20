@@ -16,7 +16,18 @@ const backProfileBtn = document.querySelector(".backProfileBtn");
 const spritePart = document.querySelector(".spritePart");
 const bottomPart = document.querySelector(".bottomPart");
 const page = document.querySelectorAll("main, header, footer, nav, .profileWindow");
+const newPokemon = document.querySelector(".newPokemon");
+const newPokemonContainer = document.querySelector(".newPokemonContainer");
+const createPokemon = document.querySelector(".createPokemon");
 let pokeBlocks = Array.from(document.querySelectorAll(".pokeBlock"));
+const nameInput = document.querySelector(".nameInput");
+const spriteInput = document.querySelector(".urlInput");
+const typeOneInput = document.querySelector(".typeOneInput");
+const typeTwoInput = document.querySelector(".typeTwoInput");
+const namePreview = document.querySelector(".namePreview");
+const spritePreview = document.querySelector(".spritePreview");
+const typeOnePreview = document.querySelector(".typeOnePreview");
+const typeTwoPreview = document.querySelector(".typeTwoPreview");
 const filterTypes = document.querySelectorAll(".type");
 const btnsNextPage = document.querySelectorAll(".nextBtn");
 const btnsBackPage = document.querySelectorAll(".backBtn");
@@ -102,6 +113,32 @@ filterTypes.forEach((type) => {
         loadMain();
     };
 });
+newPokemon.onclick = () => {
+    animationController("newPokemon");
+};
+newPokemonContainer.onclick = (event) => {
+    if (event.target === newPokemonContainer) {
+        animationController("newPokemon");
+    }
+};
+createPokemon.onclick = () => {
+    animationController("newPokemon");
+};
+nameInput.oninput = () => {
+    namePreview.innerHTML = nameInput.value;
+};
+spriteInput.oninput = () => {
+    spritePreview.src = spriteInput.value;
+};
+spritePreview.onerror = () => {
+    spritePreview.src = "./Assets/Placeholder.png";
+};
+typeOneInput.onchange = () => {
+    typeOnePreview.innerHTML = typeOneInput.value;
+};
+typeTwoInput.onchange = () => {
+    typeTwoPreview.innerHTML = typeTwoInput.value;
+};
 /* LOAD POKEDEX DATA NUEVO */
 function loadMain() {
     /* REMOVE PREVIOUS ELEMENTS */
@@ -295,12 +332,12 @@ function animationController(anim) {
         case "pageLoaded":
             loader.style.display = "none";
             page.forEach((element) => {
+                element.style.opacity = "1";
                 element.style.animation = "pageLoaded 2s forwards";
             });
             break;
         case "profileButton":
             if (closedWindow) {
-                profileWindow.style.opacity = "1"; // TO OPTIMIZE //
                 loadProfile();
                 fader.style.animation = "fadeOut 1.5s forwards";
                 closeProfileImage.style.transform = "rotate(90deg)";
@@ -325,12 +362,27 @@ function animationController(anim) {
             }
             break;
         case "onMouseEnter":
-            profileWindow.style.opacity = "1"; // TO OPTIMIZE //
             if (!animationInProgress && closedWindow) {
                 profileWindow.style.animation = "openTeaseUp 0.5s forwards";
             }
             else if (!animationInProgress) {
                 profileWindow.style.animation = "closeTeaseDown 0.5s forwards";
+            }
+            break;
+        case "newPokemon":
+            if (closedWindow) {
+                fader.style.animation = "";
+                fader.style.zIndex = "4";
+                fader.style.opacity = "0.25";
+                fader.style.visibility = "visible";
+                newPokemonContainer.style.visibility = "visible";
+                closedWindow = false;
+            }
+            else {
+                fader.style.zIndex = "2";
+                fader.style.visibility = "hidden";
+                newPokemonContainer.style.visibility = "hidden";
+                closedWindow = true;
             }
             break;
     }
